@@ -8,7 +8,7 @@ RUN apk add --update \
   build-base \
   expat-dev \
   flex-dev \
-  gettext \
+  gettext-dev \
   git \
   libintl \
   libxslt \

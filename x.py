@@ -34,7 +34,7 @@ def cmd_build(args):
     src = os.path.expanduser(args.source_dir)
     build = os.path.expanduser(args.build_dir)
 
-    sh(f"podman run -v={src}:/gdb/src -v={build}:/gdb/build localhost/{IMAGE_NAME} make -C build -j4")
+    sh(f"podman run -v={src}:/gdb/src -v={build}:/gdb/build localhost/{IMAGE_NAME} make -C build -j{args.parallel}")
 
 def main():
     parser = argparse.ArgumentParser(prog='x')
@@ -59,6 +59,12 @@ def main():
     configure.set_defaults(func=cmd_configure)
 
     build = subparsers.add_parser('build', help='build gdb')
+    build.add_argument(
+            '-j',
+            '--parallel',
+            type=int,
+            default=4,
+            help='make -j N')
     build.set_defaults(func=cmd_build)
 
     help = subparsers.add_parser(
