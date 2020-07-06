@@ -1,0 +1,2 @@
+# Allow autoload gdb-gdb helper scripts
+set auto-load safe-path /

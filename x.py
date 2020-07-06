@@ -37,6 +37,8 @@ def cmd_build(args):
     sh(f"podman run -v={src}:/gdb/src -v={build}:/gdb/build localhost/{IMAGE_NAME} make -C build -j{args.parallel}")
 
 def cmd_run(args):
+    build_image()
+
     build = os.path.expanduser(args.build_dir)
 
     sh(f"podman run -it -v={build}:/gdb/build localhost/{IMAGE_NAME} ./build/gdb/gdb")

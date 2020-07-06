@@ -21,3 +21,5 @@ WORKDIR /gdb
 
 COPY scripts/configure.sh configure.sh
 RUN chmod 755 configure.sh
+
+COPY scripts/gdbinit /root/.gdbinit
