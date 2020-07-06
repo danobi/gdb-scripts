@@ -74,8 +74,8 @@ def main():
             help='make -j N')
     build.set_defaults(func=cmd_build)
 
-    build = subparsers.add_parser('run', help='run gdb')
-    build.set_defaults(func=cmd_run)
+    run = subparsers.add_parser('run', help='run gdb')
+    run.set_defaults(func=cmd_run)
 
     help = subparsers.add_parser(
             'help',
