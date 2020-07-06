@@ -9,6 +9,8 @@ RUN apt-get install -y \
   bash \
   bison \
   build-essential \
+  flex \
+  g++ \
   libncurses-dev \
   libreadline-dev \
   texinfo \
