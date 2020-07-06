@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update
 RUN apt-get install -y \
-  automake \
+  automake-1.15 \
   bash \
   bison \
   build-essential \
@@ -14,9 +14,6 @@ RUN apt-get install -y \
   texinfo \
   xsltproc \
   zlib1g-dev
-
-RUN ln -s /bin/aclocal /bin/aclocal-1.15
-RUN ln -s /bin/automake /bin/automake-1.15
 
 WORKDIR /gdb
 
