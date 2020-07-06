@@ -8,6 +8,7 @@
   --disable-gold \
   --disable-gas \
   --disable-gprof \
+  --disable-nls \
   --with-system-readline \
   --with-system-zlib \
   --enable-unit-tests \
