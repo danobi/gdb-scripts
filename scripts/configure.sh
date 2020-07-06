@@ -10,7 +10,6 @@
   --disable-gprof \
   --with-system-readline \
   --with-system-zlib \
-  --disable-nls \
   --enable-unit-tests \
   --enable-maintainer-mode \
-  --enable-sim
+  --enable-targets=all

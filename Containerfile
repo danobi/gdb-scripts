@@ -1,24 +1,22 @@
-ARG ALPINE_VERSION=3.7
+FROM ubuntu
 
-FROM alpine:${ALPINE_VERSION}
+# To prevent tzdata from prompting input
+ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apk add --update \
+RUN apt-get update
+RUN apt-get install -y \
+  automake \
   bash \
   bison \
-  build-base \
-  expat-dev \
-  flex-dev \
-  gettext-dev \
-  git \
-  libintl \
-  libxslt \
-  linux-headers \
-  ncurses-dev \
-  perl \
-  python3-dev \
-  readline-dev \
+  build-essential \
+  libncurses-dev \
+  libreadline-dev \
   texinfo \
-  zlib-dev
+  xsltproc \
+  zlib1g-dev
+
+RUN ln -s /bin/aclocal /bin/aclocal-1.15
+RUN ln -s /bin/automake /bin/automake-1.15
 
 WORKDIR /gdb
 
