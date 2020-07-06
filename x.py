@@ -40,8 +40,12 @@ def cmd_run(args):
     build_image()
 
     build = os.path.expanduser(args.build_dir)
+    if args.gdb_args:
+        gdb_args = " ".join([str(x) for x in args.gdb_args])
+    else:
+        gdb_args = ""
 
-    sh(f"podman run -it -v={build}:/gdb/build localhost/{IMAGE_NAME} ./build/gdb/gdb")
+    sh(f"podman run -it -v={build}:/gdb/build localhost/{IMAGE_NAME} ./build/gdb/gdb {gdb_args}")
 
 def main():
     parser = argparse.ArgumentParser(prog='x')
@@ -75,6 +79,10 @@ def main():
     build.set_defaults(func=cmd_build)
 
     run = subparsers.add_parser('run', help='run gdb')
+    run.add_argument(
+            'gdb_args',
+            nargs=argparse.REMAINDER,
+            help='additional arguments to gdb')
     run.set_defaults(func=cmd_run)
 
     help = subparsers.add_parser(
