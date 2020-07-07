@@ -103,6 +103,7 @@ def main():
             type=str,
             default='/tmp/gdb-build',
             help='build directory')
+    parser.set_defaults(func=lambda _: parser.print_help())
 
     subparsers = parser.add_subparsers(help='subcommands')
 
