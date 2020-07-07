@@ -1,7 +1,7 @@
 gdb-scripts
 -----------
 
-This repository contains scripts/commands used to develop/build/test GDB.
+This repository contains scripts/commands I use to develop/build/test GDB.
 
 GDB is fairly hard to get built and tested so I containerized the build to make
 it easier to reproduce on my machines.
