@@ -88,7 +88,9 @@ def cmd_shell(args):
     sh(" ".join(a))
 
 def main():
-    parser = argparse.ArgumentParser(prog='x')
+    parser = argparse.ArgumentParser(
+            prog='x',
+            formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument(
             '-s',
             '--source-dir',
