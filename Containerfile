@@ -9,6 +9,8 @@ RUN apt-get install -y \
   bash \
   bison \
   build-essential \
+  curl \
+  dejagnu \
   flex \
   g++ \
   libncurses-dev \
@@ -23,3 +25,9 @@ COPY scripts/configure.sh configure.sh
 RUN chmod 755 configure.sh
 
 COPY scripts/gdbinit /root/.gdbinit
+
+# Install latest rust compiler
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain nightly
+
+# Update path to include rust binaries
+ENV PATH="~/.cargo/bin:${PATH}"
