@@ -33,6 +33,7 @@ optional arguments:
 
 # Notes
 
-You'll need [`podman`](https://podman.io/) installed on your system for these
-scripts to work. The default file paths are also built around my preferences
-but I've left command line options to override the the defaults.
+* You'll need [`podman`](https://podman.io/) installed on your system for these
+  scripts to work
+* The default file paths are also built around my preferences but I've left
+  command line options to override the the defaults.
