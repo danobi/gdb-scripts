@@ -25,10 +25,9 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   -s SOURCE_DIR, --source-dir SOURCE_DIR
-                        source code directory
+                        source code directory (default: ~/dev/gdb)
   -b BUILD_DIR, --build-dir BUILD_DIR
-                        build directory
-
+                        build directory (default: /tmp/gdb-build)
 ```
 
 # Notes
