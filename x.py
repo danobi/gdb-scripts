@@ -46,7 +46,7 @@ def cmd_run(args):
     else:
         gdb_args = ""
 
-    sh(f"podman run -it -v={src}:/gdb/src -v={build}:/gdb/build localhost/{IMAGE_NAME} ./build/gdb/gdb {gdb_args}")
+    sh(f"podman run -it -v={src}:/gdb/src -v={build}:/gdb/build localhost/{IMAGE_NAME} --cap-add=SYS_PTRACE --security-opt seccomp=unconfined ./build/gdb/gdb {gdb_args}")
 
 def cmd_shell(args):
     build_image()
@@ -54,7 +54,7 @@ def cmd_shell(args):
     src = os.path.expanduser(args.source_dir)
     build = os.path.expanduser(args.build_dir)
 
-    sh(f"podman run -it -v={src}:/gdb/src -v={build}:/gdb/build localhost/{IMAGE_NAME} /bin/bash")
+    sh(f"podman run -it -v={src}:/gdb/src -v={build}:/gdb/build --cap-add=SYS_PTRACE --security-opt seccomp=unconfined localhost/{IMAGE_NAME} /bin/bash")
 
 def main():
     parser = argparse.ArgumentParser(prog='x')
