@@ -39,13 +39,14 @@ def cmd_build(args):
 def cmd_run(args):
     build_image()
 
+    src = os.path.expanduser(args.source_dir)
     build = os.path.expanduser(args.build_dir)
     if args.gdb_args:
         gdb_args = " ".join([str(x) for x in args.gdb_args])
     else:
         gdb_args = ""
 
-    sh(f"podman run -it -v={build}:/gdb/build localhost/{IMAGE_NAME} ./build/gdb/gdb {gdb_args}")
+    sh(f"podman run -it -v={src}:/gdb/src -v={build}:/gdb/build localhost/{IMAGE_NAME} ./build/gdb/gdb {gdb_args}")
 
 def cmd_shell(args):
     build_image()
