@@ -31,3 +31,5 @@ RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain nightly
 
 # Update path to include rust binaries
 ENV PATH="~/.cargo/bin:${PATH}"
+# Also symlink rustc into /bin b/c for some reason the test framework needs it
+RUN ln -s ~/.cargo/bin/rustc /bin/rustc
