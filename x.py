@@ -87,6 +87,27 @@ def cmd_shell(args):
 
     sh(" ".join(a))
 
+def cmd_test(args):
+    build_image()
+
+    src = os.path.expanduser(args.source_dir)
+    build = os.path.expanduser(args.build_dir)
+    if args.test_args:
+        test_args = " ".join([str(x) for x in args.test_args])
+    else:
+        test_args = ""
+
+    a = ['podman run']
+    a.append(f"-it")
+    a.append(f"-v={src}:/gdb/src")
+    a.append(f"-v={build}:/gdb/build")
+    a.append(f"--cap-add=SYS_PTRACE ")
+    a.append(f"--security-opt seccomp=unconfined")
+    a.append(f"localhost/{IMAGE_NAME}")
+    a.append(f"make -C build/gdb/testsuite check RUNTESTFLAGS='{test_args}'")
+
+    sh(" ".join(a))
+
 def main():
     parser = argparse.ArgumentParser(
             prog='x',
@@ -130,6 +151,13 @@ def main():
 
     shell = subparsers.add_parser('shell', help='open shell')
     shell.set_defaults(func=cmd_shell)
+
+    test = subparsers.add_parser('test', help='run `make check tests`')
+    test.add_argument(
+            'test_args',
+            nargs=argparse.REMAINDER,
+            help='additional arguments to `make check RUNTESTFLAGS`')
+    test.set_defaults(func=cmd_test)
 
     help = subparsers.add_parser(
             'help',
