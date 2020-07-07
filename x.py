@@ -68,7 +68,7 @@ def main():
             '-b',
             '--build-dir',
             type=str,
-            default='~/dev/gdb/build',
+            default='/tmp/gdb-build',
             help='build directory')
 
     subparsers = parser.add_subparsers(help='subcommands')
