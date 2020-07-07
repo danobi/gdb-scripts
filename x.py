@@ -26,7 +26,14 @@ def cmd_configure(args):
     src = os.path.expanduser(args.source_dir)
     build = os.path.expanduser(args.build_dir)
 
-    sh(f"podman run -it -v={src}:/gdb/src -v={build}:/gdb/build localhost/{IMAGE_NAME} /bin/bash -c 'cd build && ../configure.sh'")
+    a = ['podman run']
+    a.append(f"-it")
+    a.append(f"-v={src}:/gdb/src")
+    a.append(f"-v={build}:/gdb/build")
+    a.append(f"localhost/{IMAGE_NAME}")
+    a.append(f"/bin/bash -c 'cd build && ../configure.sh'")
+
+    sh(" ".join(a))
 
 def cmd_build(args):
     build_image()
@@ -34,7 +41,13 @@ def cmd_build(args):
     src = os.path.expanduser(args.source_dir)
     build = os.path.expanduser(args.build_dir)
 
-    sh(f"podman run -v={src}:/gdb/src -v={build}:/gdb/build localhost/{IMAGE_NAME} make -C build -j{args.parallel}")
+    a = ['podman run']
+    a.append(f"-v={src}:/gdb/src")
+    a.append(f"-v={build}:/gdb/build")
+    a.append(f"localhost/{IMAGE_NAME}")
+    a.append(f"make -C build -j{args.parallel}")
+
+    sh(" ".join(a))
 
 def cmd_run(args):
     build_image()
@@ -46,7 +59,16 @@ def cmd_run(args):
     else:
         gdb_args = ""
 
-    sh(f"podman run -it -v={src}:/gdb/src -v={build}:/gdb/build localhost/{IMAGE_NAME} --cap-add=SYS_PTRACE --security-opt seccomp=unconfined ./build/gdb/gdb {gdb_args}")
+    a = ['podman run']
+    a.append(f"-it")
+    a.append(f"-v={src}:/gdb/src")
+    a.append(f"-v={build}:/gdb/build")
+    a.append(f"--cap-add=SYS_PTRACE ")
+    a.append(f"--security-opt seccomp=unconfined")
+    a.append(f"localhost/{IMAGE_NAME}")
+    a.append(f"./build/gdb/gdb {gdb_args}")
+
+    sh(" ".join(a))
 
 def cmd_shell(args):
     build_image()
@@ -54,7 +76,16 @@ def cmd_shell(args):
     src = os.path.expanduser(args.source_dir)
     build = os.path.expanduser(args.build_dir)
 
-    sh(f"podman run -it -v={src}:/gdb/src -v={build}:/gdb/build --cap-add=SYS_PTRACE --security-opt seccomp=unconfined localhost/{IMAGE_NAME} /bin/bash")
+    a = ['podman run']
+    a.append(f"-it")
+    a.append(f"-v={src}:/gdb/src")
+    a.append(f"-v={build}:/gdb/build")
+    a.append(f"--cap-add=SYS_PTRACE ")
+    a.append(f"--security-opt seccomp=unconfined")
+    a.append(f"localhost/{IMAGE_NAME}")
+    a.append(f"/bin/bash")
+
+    sh(" ".join(a))
 
 def main():
     parser = argparse.ArgumentParser(prog='x')
