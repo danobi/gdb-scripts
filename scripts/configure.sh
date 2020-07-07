@@ -12,5 +12,4 @@
   --with-system-readline \
   --with-system-zlib \
   --enable-unit-tests \
-  --enable-maintainer-mode \
-  --enable-targets=all
+  --enable-maintainer-mode
